@@ -1,0 +1,8 @@
+.UnSubscribeEmail{
+    background: url("../images/icons/email_delete.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding: 5px 0 5px 22px;
+}
+.SubscribeEmail{
+    background: url("../images/icons/email_add.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding: 5px 0 5px 22px;
+}
