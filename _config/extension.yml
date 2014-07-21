@@ -1,0 +1,13 @@
+Forum:
+  extensions:
+    - SubscribeExtension
+Member:
+  extensions:
+    - ForumMember_Extension
+Post:
+  extensions:
+    - ForumPostEmailSubscribers
+ForumHolder:
+  extensions:
+    - ForumHolderExtension
+    
