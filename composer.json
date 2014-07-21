@@ -1,0 +1,25 @@
+	{
+	  "name": "liquidedge/forum_subscribe",
+	  "description": "SilverStripe Forum subscriptions module",
+	  "type": "silverstripe-module",
+	  "homepage": "https://github.com/liquidedge/forum_subscribe",
+	  "keywords": ["silverstripe", "forum", "forum subscription"],
+	  "license": "BSD-3-Clause",
+	  "authors": [
+	    {"name": "David Silvester","email": "studio@liquidedge.co.nz"}
+	  ],
+	  "support": {
+	    "issues": "https://github.com/liquidedge/forum_subscribe/issues"
+	  },
+	  "require": {
+	    "silverstripe/cms": "~3.0",
+	    "silverstripe/framework": "~3.0"
+	  },
+	  "extra": {
+	    "installer-name": "elastica",
+	    "screenshots": [
+	      "screenshot/frontend-screen1.png",
+	      "screenshot/frontend-screen2.png"
+	    ]
+	  }
+	}	
