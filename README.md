@@ -1,4 +1,4 @@
-<h1>Forum subscriptions module</h1>
+<h1>SilverStripe Forum subscriptions module</h1>
 
 ## Introduction
 
@@ -37,7 +37,22 @@ This module extends the Silverstripe Forum Module and allows logged-in users to 
 Visit http://www.yoursite.com/dev/build/ in your browser.
 
 ## To show subscribe/unsubscribe links
-Place the $SubscribeLink placeholder in ForumHeader.ss.
+Place the $SubscribeLink placeholder in ForumHeader.ss, just below the code line 66
+
+	<% if Moderators %>
+		<p>
+			Moderators: 
+			<% loop Moderators %>
+				<a href="$Link">$Nickname</a>
+				<% if not Last %>, <% end_if %>
+			<% end_loop %>
+		</p>
+	<% end_if %>
+
+	$SubscribeLink
+
+*note 
+you can also create a copy of ForumHeader.ss and place in theme folder
 
 ## Flush the cache
 Also flush the cache http://www.yoursite.com/?flush=all in your browser.
