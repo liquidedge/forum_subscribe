@@ -16,7 +16,7 @@
 	    "silverstripe/framework": "~3.0"
 	  },
 	  "extra": {
-	    "installer-name": "elastica",
+	    "installer-name": "forum-subscribe",
 	    "screenshots": [
 	      "screenshot/frontend-screen1.png",
 	      "screenshot/frontend-screen2.png"
