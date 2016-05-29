@@ -81,10 +81,7 @@ class ForumPostEmailSubscribers extends DataExtension {
 		
 		$from_email = $this->owner->Forum()->parent()->FromEmail;		
 		$email->setFrom($from_email);
-		
-		$reply_to = $this->owner->Forum()->parent()->ReplyTo;		
-		$email->addCustomHeader('Reply-To', $reply_to);
-		
+
 		$email->setTo($member->Email);		
 		$config = SiteConfig::current_site_config();		
 		$email->setSubject($this->owner->Title . ' | '. $config->Title .' '. $this->owner->Forum()->Title . ' Forum');
