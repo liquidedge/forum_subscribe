@@ -1,30 +1,30 @@
 <?php
 class ForumPostEmailSubscribers extends DataExtension {
-	
-	
+
+
 	function onAfterWrite() {
 	  // if new post
-	  if($this->owner->LastEdited == $this->owner->Created){	     
+	  if($this->owner->LastEdited == $this->owner->Created){
 	     $this->notifySubscribers();
-	  }	  
-	
-	  parent::onAfterWrite();	  
+	  }
+
+	  parent::onAfterWrite();
 	}
-	
+
 	/*
 	function onBeforeWrite() {
 	  // check if this new post
-	  if(!$this->owner->ID){	      
-	      
+	  if(!$this->owner->ID){
+
 	      $this->notifySubscribers();
-	      
-	      
-	  }	
-	  parent::onBeforeWrite();	  	      	 
+
+
+	  }
+	  parent::onBeforeWrite();
 	}
 	*/
 
-	
+
 	/**
 	 * Send email to subscribers, notifying them the thread has been created or post added.
 	 */
@@ -35,57 +35,57 @@ class ForumPostEmailSubscribers extends DataExtension {
 			"Forum_Subscribers",
 			"\"ForumID\" = '". $this->owner->ForumID ."' AND \"MemberID\" != '$member_id'"
 		);
-		
+
 		if($list) {
 			foreach($list as $obj) {
 				$SQL_id = Convert::raw2sql((int)$obj->MemberID);
 
 				// Get the members details
 				$member = DataObject::get_one("Member", "\"Member\".\"ID\" = '$SQL_id'");
-				
-				  
+
+
 				if($member) {
 					//error_log("email sent ".$member->Email);
 					$type = $obj->Type;
 					switch($type){
 					  // send all email notification
 					  case 'all':
-					      $this->createEmail($member);					
+					      $this->createEmail($member);
 					    break;
-					  // send new thread only email notification  
+					  // send new thread only email notification
 					  case 'thread':
 					    //if($this->owner->isFirstPost()){
-					      $this->createEmail($member);					
+					      $this->createEmail($member);
 					    //}
 					    break;
-					  //  
+					  //
 					  default:
 					    break;
 					}
-					
+
 				}
-				
+
 			}
 		}
 	}
-	
+
 	//CREATE THE FORUM NOTIFICATION EMAIL
 	function createEmail($member)
 	{
-	
+
 		//error_log("LOG MESSAGE FROM FORUM EMAIL POST DECORATOR LINK IS ".$this->owner->AbsoluteLink());
-		
+
 		$controller = new SubscribeController();
-		
-		$email = new Email();	
-		
-		$from_email = $this->owner->Forum()->parent()->FromEmail;		
+
+		$email = new Email();
+
+		$from_email = $this->owner->Forum()->parent()->FromEmail;
 		$email->setFrom($from_email);
 
-		$email->setTo($member->Email);		
-		$config = SiteConfig::current_site_config();		
+		$email->setTo($member->Email);
+		$config = SiteConfig::current_site_config();
 		$email->setSubject($this->owner->Title . ' | '. $config->Title .' '. $this->owner->Forum()->Title . ' Forum');
-		$email->setTemplate('Forum_SubscriberNotification');		
+		$email->setTemplate('Forum_SubscriberNotification');
 		$email->populateTemplate(array(
 			'Recipient' => $member->FirstName,
 			'Link' => $this->owner->Link(),
